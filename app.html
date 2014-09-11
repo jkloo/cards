@@ -16,16 +16,13 @@
 
     <body>
 
-        <div ng-app="" ng-controller="documentsController"> 
-            <div class="col-md-4 col-sm-6" ng-repeat="doc in docs">
+        <div ng-app="" ng-controller="documentController">
+            <div class="col-md-4 col-sm-6" ng-repeat="doc in documents">
                 <div class="panel panel-default" ng-repeat="y in [0,1,2,3]">
                     <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>{{doc}}</h4></div>
                     <div class="panel-body">
-                        <img src="img/150x150.gif" class="img-circle pull-right"> <a href="#">Free @Bootply</a>
                         <div class="clearfix"></div>
-                        There a load of new free Bootstrap 3 ready templates at Bootply. All
-                        of these templates are free and don't require extensive customization
-                        to the Bootstrap baseline.
+                        {{items[doc]}}
                         <hr>
                         <ul class="list-unstyled"><li><a href="http://www.bootply.com/templates">Dashboard</a></li><li><a href="http://www.bootply.com/templates">Darkside</a></li><li><a href="http://www.bootply.com/templates">Greenfield</a></li></ul>
                     </div>
@@ -33,19 +30,7 @@
             </div>
         </div>
 
-        
+        <script src="js/documentController.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-        <script>
-            function documentsController($scope, $http) {
-              $http.get("http://localhost:7867/documents?format=json")
-              .success(function(response) {$scope.docs = response.prefixes;});
-            }
-        </script>
-        <script>
-            function requirementController($scope, $http) {
-              $http.get("http://localhost:7867/documents/REQ/items?format=json")
-              .success(function(response) {$scope.uids = response.uids;});
-            }
-        </script>
     </body>
 </html>
