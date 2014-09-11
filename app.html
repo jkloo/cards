@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="doorstopui">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
@@ -14,23 +14,81 @@
         <link href="css/styles.css" rel="stylesheet">
     </head>
 
-    <body>
+    <body ng-controller="documentController">
+        <nav class="navbar navbar-fixed-top header">
+            <div class="col-md-12">
+                <div class="navbar-header">
+                    
+                    <a href="#" class="navbar-brand">DoorstopUI</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
+                    <i class="fa fa-search"></i>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse1">
+                    <form class="navbar-form pull-left">
+                        <div class="input-group" style="max-width:470px;">
+                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="http://www.doorstop.info" target="_ext">Doorstop</a></li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </li>
+                        <li><a href="#" id="btnToggle"><i class="fa fa-th-large"></i></a></li>
+                        <li><a href="#"><i class="fa fa-user"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <div ng-app="" ng-controller="documentController">
-            <div class="col-md-4 col-sm-6" ng-repeat="doc in documents">
-                <div class="panel panel-default" ng-repeat="y in [0,1,2,3]">
-                    <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>{{doc}}</h4></div>
+        <div class="navbar navbar-default" id="subnav">
+            <div class="col-md-12">
+                <div class="navbar-header">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse2">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="docTab" class="active"><a href="#">Main</a></li>
+                        <li id="docTab" data-ng-repeat="(prefix, document) in items"><a href="#">{{prefix}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="main">
+            <div ng-repeat="(prefix, document) in items">
+                <div class="panel panel-default" ng-repeat="(id, item) in document">
+                    <div class="panel-heading"><h4>{{id}}</h4></div>
                     <div class="panel-body">
                         <div class="clearfix"></div>
-                        {{items[doc]}}
+                        <div markdown>{{item.text}}</div>
                         <hr>
-                        <ul class="list-unstyled"><li><a href="http://www.bootply.com/templates">Dashboard</a></li><li><a href="http://www.bootply.com/templates">Darkside</a></li><li><a href="http://www.bootply.com/templates">Greenfield</a></li></ul>
+                        <ul class="list-unstyled">
+                            <li ng-repeat="link in item.links"><a href="#{{req}}" ng-repeat="(req, hash) in link">{{req}}</a></li>
+                        </ul>
                     </div>
-                 </div> 
+                </div>
+            </div>
             </div>
         </div>
 
-        <script src="js/documentController.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/ctrl.js"></script>
+        <!-- <script src="js/markdown.js"></script> -->
+        <script src="js/scripts.js"></script>
     </body>
 </html>
